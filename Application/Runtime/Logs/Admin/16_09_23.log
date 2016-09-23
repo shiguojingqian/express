@@ -1,0 +1,283 @@
+[ 2016-09-23T01:38:05+08:00 ] 113.108.21.69 /Admin/Region/add.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000026s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000294s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000377s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000436s ]
+SQL: SHOW COLUMNS FROM `rrsd_emsaddress` [ RunTime:0.0326s ]
+SQL: SELECT * FROM `rrsd_emsaddress` WHERE `level` = 2  [ RunTime:0.0322s ]
+SQL: SHOW COLUMNS FROM `rrsd_ranges` [ RunTime:0.0325s ]
+SQL: SELECT `id`,`range_name` FROM `rrsd_ranges` WHERE `status` = 1  [ RunTime:0.0320s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000070s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000110s ]
+NOTIC: [8] Undefined index: level /home/www/rrsd/Application/Runtime/Cache/Admin/2187eaa55ad2b15b35902851f1e6999b.php 第 39 行.
+NOTIC: [8] Undefined index: path /home/www/rrsd/Application/Runtime/Cache/Admin/2187eaa55ad2b15b35902851f1e6999b.php 第 40 行.
+NOTIC: [8] Undefined index: level /home/www/rrsd/Application/Runtime/Cache/Admin/2187eaa55ad2b15b35902851f1e6999b.php 第 42 行.
+NOTIC: [8] Undefined index: level /home/www/rrsd/Application/Runtime/Cache/Admin/2187eaa55ad2b15b35902851f1e6999b.php 第 59 行.
+NOTIC: [8] Undefined index: level /home/www/rrsd/Application/Runtime/Cache/Admin/2187eaa55ad2b15b35902851f1e6999b.php 第 68 行.
+NOTIC: [8] Undefined index: level /home/www/rrsd/Application/Runtime/Cache/Admin/2187eaa55ad2b15b35902851f1e6999b.php 第 77 行.
+NOTIC: [8] Undefined index: level /home/www/rrsd/Application/Runtime/Cache/Admin/2187eaa55ad2b15b35902851f1e6999b.php 第 93 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.008862s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.008897s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000109s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000140s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000681s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000716s ]
+
+[ 2016-09-23T01:38:12+08:00 ] 101.226.66.181 /Admin/Region/add.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000260s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000391s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000428s ]
+SQL: SHOW COLUMNS FROM `rrsd_emsaddress` [ RunTime:0.0343s ]
+SQL: SELECT * FROM `rrsd_emsaddress` WHERE `level` = 2  [ RunTime:0.0339s ]
+SQL: SHOW COLUMNS FROM `rrsd_ranges` [ RunTime:0.0340s ]
+SQL: SELECT `id`,`range_name` FROM `rrsd_ranges` WHERE `status` = 1  [ RunTime:0.0342s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000048s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000086s ]
+NOTIC: [8] Undefined index: level /home/www/rrsd/Application/Runtime/Cache/Admin/2187eaa55ad2b15b35902851f1e6999b.php 第 39 行.
+NOTIC: [8] Undefined index: path /home/www/rrsd/Application/Runtime/Cache/Admin/2187eaa55ad2b15b35902851f1e6999b.php 第 40 行.
+NOTIC: [8] Undefined index: level /home/www/rrsd/Application/Runtime/Cache/Admin/2187eaa55ad2b15b35902851f1e6999b.php 第 42 行.
+NOTIC: [8] Undefined index: level /home/www/rrsd/Application/Runtime/Cache/Admin/2187eaa55ad2b15b35902851f1e6999b.php 第 59 行.
+NOTIC: [8] Undefined index: level /home/www/rrsd/Application/Runtime/Cache/Admin/2187eaa55ad2b15b35902851f1e6999b.php 第 68 行.
+NOTIC: [8] Undefined index: level /home/www/rrsd/Application/Runtime/Cache/Admin/2187eaa55ad2b15b35902851f1e6999b.php 第 77 行.
+NOTIC: [8] Undefined index: level /home/www/rrsd/Application/Runtime/Cache/Admin/2187eaa55ad2b15b35902851f1e6999b.php 第 93 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.008703s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.008750s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000110s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000142s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000338s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000372s ]
+
+[ 2016-09-23T01:41:02+08:00 ] 180.163.2.88 /Admin/Region/add.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000018s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000378s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000506s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000566s ]
+SQL: SHOW COLUMNS FROM `rrsd_emsaddress` [ RunTime:0.0323s ]
+SQL: SELECT * FROM `rrsd_emsaddress` WHERE `level` = 2  [ RunTime:0.0322s ]
+SQL: SHOW COLUMNS FROM `rrsd_ranges` [ RunTime:0.0320s ]
+SQL: SELECT `id`,`range_name` FROM `rrsd_ranges` WHERE `status` = 1  [ RunTime:0.0317s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000061s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000111s ]
+NOTIC: [8] Undefined index: level /home/www/rrsd/Application/Runtime/Cache/Admin/2187eaa55ad2b15b35902851f1e6999b.php 第 39 行.
+NOTIC: [8] Undefined index: path /home/www/rrsd/Application/Runtime/Cache/Admin/2187eaa55ad2b15b35902851f1e6999b.php 第 40 行.
+NOTIC: [8] Undefined index: level /home/www/rrsd/Application/Runtime/Cache/Admin/2187eaa55ad2b15b35902851f1e6999b.php 第 42 行.
+NOTIC: [8] Undefined index: level /home/www/rrsd/Application/Runtime/Cache/Admin/2187eaa55ad2b15b35902851f1e6999b.php 第 59 行.
+NOTIC: [8] Undefined index: level /home/www/rrsd/Application/Runtime/Cache/Admin/2187eaa55ad2b15b35902851f1e6999b.php 第 68 行.
+NOTIC: [8] Undefined index: level /home/www/rrsd/Application/Runtime/Cache/Admin/2187eaa55ad2b15b35902851f1e6999b.php 第 77 行.
+NOTIC: [8] Undefined index: level /home/www/rrsd/Application/Runtime/Cache/Admin/2187eaa55ad2b15b35902851f1e6999b.php 第 93 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.010409s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.010467s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000131s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000171s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000369s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000404s ]
+
+[ 2016-09-23T01:41:10+08:00 ] 101.226.33.221 /Admin/Region/add.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000257s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000345s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000381s ]
+SQL: SHOW COLUMNS FROM `rrsd_emsaddress` [ RunTime:0.0262s ]
+SQL: SELECT * FROM `rrsd_emsaddress` WHERE `level` = 2  [ RunTime:0.0262s ]
+SQL: SHOW COLUMNS FROM `rrsd_ranges` [ RunTime:0.0260s ]
+SQL: SELECT `id`,`range_name` FROM `rrsd_ranges` WHERE `status` = 1  [ RunTime:0.0257s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000047s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000085s ]
+NOTIC: [8] Undefined index: level /home/www/rrsd/Application/Runtime/Cache/Admin/2187eaa55ad2b15b35902851f1e6999b.php 第 39 行.
+NOTIC: [8] Undefined index: path /home/www/rrsd/Application/Runtime/Cache/Admin/2187eaa55ad2b15b35902851f1e6999b.php 第 40 行.
+NOTIC: [8] Undefined index: level /home/www/rrsd/Application/Runtime/Cache/Admin/2187eaa55ad2b15b35902851f1e6999b.php 第 42 行.
+NOTIC: [8] Undefined index: level /home/www/rrsd/Application/Runtime/Cache/Admin/2187eaa55ad2b15b35902851f1e6999b.php 第 59 行.
+NOTIC: [8] Undefined index: level /home/www/rrsd/Application/Runtime/Cache/Admin/2187eaa55ad2b15b35902851f1e6999b.php 第 68 行.
+NOTIC: [8] Undefined index: level /home/www/rrsd/Application/Runtime/Cache/Admin/2187eaa55ad2b15b35902851f1e6999b.php 第 77 行.
+NOTIC: [8] Undefined index: level /home/www/rrsd/Application/Runtime/Cache/Admin/2187eaa55ad2b15b35902851f1e6999b.php 第 93 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.008725s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.008762s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000107s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000149s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000350s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000384s ]
+
+[ 2016-09-23T01:41:12+08:00 ] 180.153.201.79 /Admin/Region/add.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000265s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000319s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000355s ]
+SQL: SHOW COLUMNS FROM `rrsd_emsaddress` [ RunTime:0.0296s ]
+SQL: SELECT * FROM `rrsd_emsaddress` WHERE `level` = 2  [ RunTime:0.0298s ]
+SQL: SHOW COLUMNS FROM `rrsd_ranges` [ RunTime:0.0297s ]
+SQL: SELECT `id`,`range_name` FROM `rrsd_ranges` WHERE `status` = 1  [ RunTime:0.0296s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000084s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000147s ]
+NOTIC: [8] Undefined index: level /home/www/rrsd/Application/Runtime/Cache/Admin/2187eaa55ad2b15b35902851f1e6999b.php 第 39 行.
+NOTIC: [8] Undefined index: path /home/www/rrsd/Application/Runtime/Cache/Admin/2187eaa55ad2b15b35902851f1e6999b.php 第 40 行.
+NOTIC: [8] Undefined index: level /home/www/rrsd/Application/Runtime/Cache/Admin/2187eaa55ad2b15b35902851f1e6999b.php 第 42 行.
+NOTIC: [8] Undefined index: level /home/www/rrsd/Application/Runtime/Cache/Admin/2187eaa55ad2b15b35902851f1e6999b.php 第 59 行.
+NOTIC: [8] Undefined index: level /home/www/rrsd/Application/Runtime/Cache/Admin/2187eaa55ad2b15b35902851f1e6999b.php 第 68 行.
+NOTIC: [8] Undefined index: level /home/www/rrsd/Application/Runtime/Cache/Admin/2187eaa55ad2b15b35902851f1e6999b.php 第 77 行.
+NOTIC: [8] Undefined index: level /home/www/rrsd/Application/Runtime/Cache/Admin/2187eaa55ad2b15b35902851f1e6999b.php 第 93 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.009346s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009385s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000119s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000166s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000403s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000443s ]
+
+[ 2016-09-23T02:10:33+08:00 ] 112.90.82.196 /Admin/Index/shouye.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000011s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000244s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000326s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000364s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000076s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000138s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.008344s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.008381s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000106s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000153s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000379s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000427s ]
+
+[ 2016-09-23T02:13:32+08:00 ] 180.153.214.152 /Admin/Index/shouye.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000290s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000328s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000369s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000057s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000100s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.008866s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.008903s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000144s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000186s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000340s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000377s ]
+
+[ 2016-09-23T02:22:35+08:00 ] 112.90.82.196 /Admin/UserAdmin/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000015s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000266s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000356s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000396s ]
+SQL: SHOW COLUMNS FROM `rrsd_user_admin` [ RunTime:0.0305s ]
+SQL: SELECT * FROM `rrsd_user_admin`  [ RunTime:0.0299s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000040s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000076s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.007169s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.007239s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000117s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000149s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000339s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000396s ]
+
+[ 2016-09-23T02:25:34+08:00 ] 101.226.51.228 /Admin/UserAdmin/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000269s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000426s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000463s ]
+SQL: SHOW COLUMNS FROM `rrsd_user_admin` [ RunTime:0.0302s ]
+SQL: SELECT * FROM `rrsd_user_admin`  [ RunTime:0.0299s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000051s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000093s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.007131s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.007178s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000125s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000158s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000375s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000409s ]
+
+[ 2016-09-23T03:49:20+08:00 ] 180.153.214.182 /Admin/AuthRule/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000019s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000369s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000335s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000378s ]
+SQL: SHOW COLUMNS FROM `rrsd_auth_rule` [ RunTime:0.0306s ]
+SQL: SELECT * FROM `rrsd_auth_rule`  [ RunTime:0.0301s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000046s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000107s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.007123s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.007177s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000129s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000161s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000372s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000411s ]
+
+[ 2016-09-23T03:55:16+08:00 ] 180.153.214.200 /Admin/Dot/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000246s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000338s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000376s ]
+SQL: SHOW COLUMNS FROM `rrsd_dot` [ RunTime:0.0303s ]
+SQL: SELECT * FROM `rrsd_dot` WHERE `status` = 1  [ RunTime:0.0297s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000047s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000088s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.007693s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.007741s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000130s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000163s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000385s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000420s ]
+

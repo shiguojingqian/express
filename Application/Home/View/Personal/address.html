@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="pragram" content="no-cache">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>收货地址管理</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <link href="__PUBLIC__/Home/css/iconfont.css" rel="stylesheet" type="text/css">
+    <link href="__PUBLIC__/Home/css/style.css" rel="stylesheet" type="text/css">
+    <script src="__PUBLIC__/Home/js/jquery-1.11.1.min.js"></script>
+    <script src="__PUBLIC__/Home/js/angular.js"></script> 
+</head>    
+<body>
+	<div class="head flexBox headSearch" >
+        <a href="javascript:;" class="iconfont icon-zuo"></a>
+        <div class="logoTitle">人人配送</div>
+    </div>
+    <ul class="positionList2">
+        <li>
+            <a href="订单详情.html">
+                <div class="userInfo">
+                    <div class="l">李木木</div>
+                    <div class="r">18061945747</div>
+                </div>
+                <div class="positionContent">江苏省四周是撒打算看鹿鼎记阿拉斯加打扫街道的索拉卡到家啦三季度拉伸</div>
+            </a>
+            <div class="positionOperate">
+                <label class="l">
+                    <input type="radio" name="position" />
+                    <span></span>设为默认地址
+                </label>
+                <div class="r">
+                    <a href="新增地址.html">
+                        <i class="iconfont icon-bianji"></i>编辑
+                    </a>
+                    <a href="javascript:;" onclick="$('.popWindow').show();">
+                        <i class="iconfont icon-shanchu"></i>删除
+                    </a>
+                </div>
+            </div>
+        </li>
+       
+    </ul>
+    <a href="{:U('Personal/addressinsert',array('openid'=>$UserInfo['openid']))}" class="addAdress">
+        <span class="iconfont icon-jia"></span>&nbsp;新增地址
+    </a>
+
+    <div class="popWindow">
+        <div class="noticePop">
+            <div class="noticeTitle">温馨提示</div>
+            <div class="noticeWord">
+                确认要删除此收货地址吗？
+            </div>
+            <div class="popBtnGroup">
+	            <div onclick='$(".popWindow").hide()'>取消</div>
+	            <a href="javascript:;">确定</a>
+	        </div>
+        </div>
+    </div>
+</body>
+</html>

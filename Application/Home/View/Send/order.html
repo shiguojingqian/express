@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="pragram" content="no-cache">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>订单</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <link href="__PUBLIC__/Home/css/iconfont.css" rel="stylesheet" type="text/css">
+    <link href="__PUBLIC__/Home/css/style.css" rel="stylesheet" type="text/css">
+    <script src="__PUBLIC__/Home/js/jquery-1.11.1.min.js"></script>
+    <script src="__PUBLIC__/layer/layer.js"></script>
+</head>    
+<body>
+    <div class="head flexBox headSearch" >
+        <a href="javascript:;" class="iconfont icon-zuo"></a>
+        <div class="logoTitle">人人配送</div>
+    </div>
+    <div class="orderHead">
+        订单编号：{$SendInfo.number}
+<!--         <div class="r">
+            <span>货柜 1</span>
+            <span>货柜 28</span>
+        </div> -->
+    </div>
+<!--     <div class="footer">
+        合计 <span class="color-red">￥99.00</span>
+        <a class="r" href="javascript:;">支付订单</a>
+    </div> -->
+    <div class="flexBoxGroup">
+        <div class="flexBox">
+            <div class="iconfont icon-dingwei"></div>
+            <div class="flexChild">
+                <div>寄件人:{$SendInfo.sender_name} {$SendInfo.sender_mobile}</div>
+                <div>寄件地址:{$SendInfo.sender_city}——{$SendInfo.sender_address_detail}</div>
+            </div>
+        </div>
+        <div class="flexBox">
+            <div class="iconfont icon-mudedi"></div>
+            <div class="flexChild">
+                <div>收件人:{$SendInfo.receiver_name} {$SendInfo.receiver_mobile}</div>
+                <div>收件地址:{$SendInfo.receiver_city}——{$SendInfo.receiver_address_detail}</div>
+            </div>
+        </div>
+    </div>
+    <div class="switchBlock switchBlockOrder">
+        物品名称
+        <span class="r">{$SendInfo.goods_name}</span>
+    </div>
+<!--     <div class="switchBlock switchBlockOrder">
+        支付方式
+        <span class="r">微信支付</span>
+    </div> -->
+    <div class="switchBlock switchBlockOrder">
+        备注
+        <span class="r">{$SendInfo.remarks}</span>
+    </div>
+    <if condition="$_GET['type'] eq 'jijian'">
+    <neq name="SendInfo.status" value="4">
+        <a class="btnA mt30"><eq name="SendInfo.status" value="3">确认取货</eq><eq name="SendInfo.status" value="6">确认送达</eq></a>
+    <else />
+         <a class="btnA"><eq name="SendInfo.status" value="4">已完成</eq></a>
+    </neq>
+    <else />
+    <div class="footer">
+        合计 <span class="color-red">￥{$SendInfo.price}</span>
+        <if condition="$SendInfo.pay_type eq 0">
+        <a class="r" href="javascript:;" onclick="payNow()">确认支付</a>
+        <else />
+        <a class="r" href="javascript:;"><eq name="SendInfo.status" value="1">处理中</eq><eq name="SendInfo.status" value="2">已发布</eq><eq name="SendInfo.status" value="3">已接单</eq><eq name="SendInfo.status" value="6">配送中</eq><eq name="SendInfo.status" value="4">已完成</eq></a>
+        </if>
+    </div>
+    </if>
+</body>
+<script>
+$(".mt30").click(function(){
+    $.ajax({
+       type: "POST",
+       url: "{:U('Order/ajaxsend')}",
+       data: {id:"{$SendInfo.id}",status:"{$SendInfo.status}"},
+       dataType: 'json',
+       success: function(data){
+            if(data.status == 0){
+                layer.msg(data.info, {icon: 5,time: 2000 });  
+            }else{
+                layer.msg(data.info, {icon: 1,time: 2000 }, function(){history.go(0);});  
+            }
+       }
+    });
+});
+</script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script>
+    var paylock = false;
+    wx.config({
+    //debug:true,
+    appId: '{$signPackage.appId}',
+    timestamp: '{$signPackage.timestamp}',
+    nonceStr: '{$signPackage.nonceStr}',
+    signature: '{$signPackage.signature}',
+    jsApiList: ['chooseWXPay']
+  });
+    wx.ready(function (){
+    	wx.hideOptionMenu();
+    });
+    function payNow(){
+        if(paylock == 'true'){
+            return false;
+        }
+        paylock = true;
+        $.ajax({
+           type: "POST",
+           url: "{:U('Send/ajaxpay')}",
+           data: {id:"{$SendInfo['id']}",range_id:"{$SendInfo['range_id']}",'number':"{$SendInfo['number']}"},
+           dataType: "json",
+           success: function(msg){
+                console.log(msg);
+                if(msg.status == 1){
+                     wx.chooseWXPay({
+                        timestamp: msg.info.timeStamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
+                        nonceStr: msg.info.nonceStr, // 支付签名随机串，不长于 32 位
+                        package: msg.info.package, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=***）
+                        signType: msg.info.signType, // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
+                        paySign: msg.info.paySign, // 支付签名
+                        success: function (res) {
+                            /* var temp = ""; 
+                            for(var i in res){
+                            temp += i+":"+res[i]+"\n"; 
+                            } 
+                            alert(temp); */
+                            // 支付成功后的回调函数
+                            searchPay(res);
+                        }
+                    });
+               }
+           }
+        });
+        
+        
+    }
+    //触发查询是否支付成功
+    function searchPay(res){
+    	if(res.errMsg == "chooseWXPay:ok" ) {
+    		alert('支付成功');
+            history.go(0);
+            //location.href = "{:U('Personal/order',array('openid'=>get_openid()))}";
+    	}else{
+    		$(".logo").eq(2).removeClass('hide').prevAll().addClass('hide')
+    	}
+    }
+</script>
+</html>

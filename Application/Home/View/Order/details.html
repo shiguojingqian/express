@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="pragram" content="no-cache">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>订单</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <link href="__PUBLIC__/Home/css/iconfont.css" rel="stylesheet" type="text/css">
+    <link href="__PUBLIC__/Home/css/style.css" rel="stylesheet" type="text/css">
+    <script src="__PUBLIC__/Home/js/jquery-1.11.1.min.js"></script>
+    <script src="__PUBLIC__/layer/layer.js"></script>
+    <style>
+        .formList{
+            padding:0;
+        }
+        .formList:after {
+            left: 0;
+            right: 0;
+        }
+    </style>
+</head>    
+<body>
+    <div class="head flexBox headSearch" >
+        <a href="javascript:;" class="iconfont icon-zuo"></a>
+        <div class="logoTitle">人人配送</div>
+    </div>
+    <div class="orderHead">
+        单号：{$OrderInfo.sendgoodno}
+<!--         <div class="r">
+            <span>货柜 1</span>
+            <span>货柜 28</span>
+        </div> -->
+    </div>
+    
+    <div class="flexBoxGroup">
+        <div class="flexBox">
+            <div class="iconfont icon-dingwei"></div>
+            <div class="flexChild">
+                <div>{$OrderInfo.dot_name} {$OrderInfo.phone}</div>
+                <div>{$OrderInfo.address}</div>
+            </div>
+        </div>
+    <form action="{:U('Order/generate')}" method="POST">
+        <input type="hidden" name="order_id" value="{$OrderInfo.id}" />
+        <input type="hidden" name="sendgoodno" value="{$OrderInfo.sendgoodno}" />
+        <div class="addPosition">
+            <label class="formList">
+                联系人
+                <input class="r" type="text" name="name" placeholder="请输入联系人姓名" />
+            </label>
+            <label class="formList">
+                手机号码
+                <input class="r" type="tel" name="phone" placeholder="请输入手机号码" />
+            </label>
+            
+            <label class="formList">
+                市
+                <select class="change" name="city_id[]">
+                    <option value=''>请选择</option>
+                    <volist name="RegionList" id="vo">
+                    <option value="{$vo.id}">{$vo.city}</option>
+                    </volist>
+                </select>
+                <div class="r">请选择</div>
+            </label>
+            <label class="formList">
+                区
+                <select class="change" name="city_id[]">
+                    <option value=''>请选择</option>
+                </select>
+                <div class="r">请选择</div>
+            </label>
+            <label class="formList">
+                镇
+                <select class="change" name="city_id[]">
+                    <option value=''>请选择</option>
+                </select>
+                <div class="r">请选择</div>
+            </label>
+            <label class="formList">
+                村
+                <select class="change" name="city_id[]" id="rid">
+                    <option value=''>请选择</option>
+                </select>
+                <div class="r">请选择</div>
+            </label>
+            <label class="formList">
+                详细地址
+                <input class="r" type="text" name="address" placeholder="请输入详细地址" />
+            </label>
+        </div>    
+    </div>
+    <label class="switchBlock zhuandan">
+        <input type="checkBox" name="vip" value="1"/>
+        <i class="iconfont"></i>
+        专单+{$setting.vip}元<span class="switchBlockNotice">选择专单，系统将立即为您选择配送员</span>
+    </label>
+    </form>
+    <div class="footer">
+        合计￥ <span class="color-red total">{$setting.price}</span>
+        <a class="r submit" href="javascript:;">提交订单</a>
+    </div> 
+</body>
+    <script type="text/javascript">
+        $('.zhuandan').click(function(){
+            if($(this).find('input').is(":checked")){
+                var price = "{$setting.price}";
+                var vip = "{$setting.vip}";
+                var total =parseInt(price) + parseInt(vip) + ".00";
+                $('.total').html(total);
+            }else{
+                $('.total').html("{$setting.price}");
+            }
+        });
+        $(".formList select").change(function(){
+            $(this).siblings("div.r").text($(this).children("option:selected").text());
+        })
+    </script>
+    <script>
+        $(".change").change(function(){
+            var id = $(this).val();
+            var self = $(this);
+            var html = '<option value="">请选择</option>';
+            var rid = $("#rid option:selected").data('rid');
+            if(rid){
+                return false;
+            }
+            if(id != ''){
+                $.ajax({
+                    url: "{:U('Personal/select')}" ,  
+                    type: 'POST',  
+                    data: {'id':id},
+                    async: false,  
+                    dataType: 'json',
+                    success: function (data) {
+                        var datalength = data.info.length;
+                        self.parent('.formList').nextAll('.formList').find('select').html(html);
+                        if(datalength >= 1){
+                            for(var i=0;i<datalength;i++){
+                               html += "<option value='"+data.info[i]['id']+"' data-rid='"+data.info[i]['range_id']+"'>"+data.info[i]['city']+"</option>";
+                            }
+                            self.parent('.formList').next('.formList').find('select').html(html);
+                            self.parent('.formList').nextAll('.formList').find('.r').html("请选择");
+                        }
+                    }
+                });
+            }else{
+                self.parent('.formList').nextAll('.formList').find('select').html(html);
+                self.parent('.formList').nextAll('.formList').find('.r').html("请选择");
+            }
+        });
+    </script>
+<script type="text/javascript">
+    	$(".submit").click(function(){
+    		var self = $('form');
+    		$.post(self.attr("action"), self.serialize(), success, "json");
+    		return false;
+
+    		function success(data){
+				if(data.status == 0){
+					layer.msg(data.info, {icon: 5,time: 2000 });  
+				}else{
+					layer.msg(data.info, {icon: 1,time: 2000 }, function(){history.go(0);});  
+				}
+    		}
+    	});
+</script>
+</html>

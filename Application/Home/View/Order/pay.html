@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="pragram" content="no-cache">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>订单</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <link href="__PUBLIC__/Home/css/iconfont.css" rel="stylesheet" type="text/css">
+    <link href="__PUBLIC__/Home/css/style.css" rel="stylesheet" type="text/css">
+    <script src="__PUBLIC__/Home/js/jquery-1.11.1.min.js"></script>
+
+</head>    
+<body>
+    <div class="head flexBox headSearch" >
+        <a href="javascript:;" class="iconfont icon-zuo"></a>
+        <div class="logoTitle">人人配送</div>
+    </div>
+    <div class="orderHead">
+        单号：{$OrderInfo.sendgoodno}
+<!--         <div class="r">
+            <span>货柜 1</span>
+            <span>货柜 28</span>
+        </div> -->
+    </div>
+    <div class="footer">
+        合计 <span class="color-red">￥99.00</span>
+        <a class="r" href="javascript:;">提交订单</a>
+    </div>
+    <div class="flexBoxGroup">
+        <div class="flexBox">
+            <div class="iconfont icon-dingwei"></div>
+            <div class="flexChild">
+                <div>{$OrderInfo.dot_name} {$OrderInfo.phone}</div>
+                <div>{$OrderInfo.address}</div>
+            </div>
+        </div>
+        <div class="flexBox">
+            <div class="iconfont icon-mudedi"></div>
+            <div class="flexChild">
+                <div>{$OrderListInfo.name} {$OrderListInfo.phone}</div>
+                <div>{$OrderListInfo.city_id} {$OrderListInfo.address}</div>
+            </div>
+        </div>
+    </div>
+    <div class="switchBlock switchBlockOrder">
+        支付方式
+        <span class="r">微信支付</span>
+    </div>
+    <div class="footer">
+        合计 <span class="color-red">￥{$OrderListInfo.price}</span>
+        <a class="r" id="pay" onclick="payNow()" href="javascript:;">确认支付</a>
+    </div>
+</body>
+
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script>
+    var paylock = false;
+    wx.config({
+    //debug:true,
+    appId: '{$signPackage.appId}',
+    timestamp: '{$signPackage.timestamp}',
+    nonceStr: '{$signPackage.nonceStr}',
+    signature: '{$signPackage.signature}',
+    jsApiList: ['chooseWXPay']
+  });
+    wx.ready(function (){
+    	wx.hideOptionMenu();
+    });
+    function payNow(){
+        if(paylock == 'true'){
+            return false;
+        }
+        paylock = true;
+        $.ajax({
+           type: "POST",
+           url: "{:U('Order/ajaxpay')}",
+           data: {order_list_id:"{$OrderListInfo['id']}",range_id:"{$OrderListInfo['range_id']}"},
+           dataType: "json",
+           success: function(msg){
+                console.log(msg);
+                if(msg.status == 1){
+                     wx.chooseWXPay({
+                        timestamp: msg.info.timeStamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
+                        nonceStr: msg.info.nonceStr, // 支付签名随机串，不长于 32 位
+                        package: msg.info.package, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=***）
+                        signType: msg.info.signType, // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
+                        paySign: msg.info.paySign, // 支付签名
+                        success: function (res) {
+                            /* var temp = ""; 
+                            for(var i in res){
+                            temp += i+":"+res[i]+"\n"; 
+                            } 
+                            alert(temp); */
+                            // 支付成功后的回调函数
+                            searchPay(res);
+                        }
+                    });
+               }
+           }
+        });
+        
+        
+    }
+    //触发查询是否支付成功
+    function searchPay(res){
+    	if(res.errMsg == "chooseWXPay:ok" ) {
+    		alert('支付成功');
+            history.go(0);
+            //location.href = "{:U('Personal/order',array('openid'=>get_openid()))}";
+    	}else{
+    		$(".logo").eq(2).removeClass('hide').prevAll().addClass('hide')
+    	}
+    }
+</script>
+</html>

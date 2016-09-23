@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="pragram" content="no-cache">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>后台管理</title>
+	<link href="__PUBLIC__/Admin/css/style.css" rel="stylesheet" type="text/css">
+	<link href="__PUBLIC__/Admin/css/animate.css" rel="stylesheet" type="text/css">
+	<link href="__PUBLIC__/Admin/css/iconfont.css" rel="stylesheet" type="text/css">
+	<script src="__PUBLIC__/Admin/js/jquery-1.11.1.min.js"></script>
+	<script src="__PUBLIC__/Admin/js/publicjquery.js"></script>
+    <script src="__PUBLIC__/layer/layer.js"></script>
+</head>
+<body onselectstart="return false">
+<div class="main FromUpToDown">
+	<div class="content">
+		<div class="head-content">
+			<div class="head-title">
+				<span>管理员添加</span>
+			</div>
+		</div>
+        <form action="{:U('UserAdmin/insert')}" method="POST">
+		<div class="form-content">
+			<div class="form">
+				<div class="form-left">用户名</div>
+				<div class="form-right">
+					<input class="form-input-big" name="username" type="text" placeholder="请填写" />
+					<div class="notice">这里填写用户名</div>
+				</div>
+			</div>
+
+			<div class="form">
+				<div class="form-left">用户密码</div>
+				<div class="form-right">
+					<input class="form-input-big" name="password" type="password" placeholder="请填写" />
+					<div class="notice">这里填写用户密码</div>
+				</div>
+			</div>
+
+			<div class="form">
+				<div class="form-left">确认密码</div>
+				<div class="form-right">
+					<input class="form-input-big" name="repassword" type="password" placeholder="请填写" />
+					<div class="notice">这里填写确认密码</div>
+				</div>
+			</div>
+
+             <div class="form">
+				<div class="form-left">所属角色</div>
+				<div class="form-right">
+					<select class="form-select-big" name="group_id">
+                        <option value="">请选择</option>
+                        <volist name="AuthGroupList" id="vo">
+                        <option value="{$vo.id}">{$vo.title}</option>
+                        </volist>
+                    </select>
+                </div>        
+			</div>
+
+			<div class="form">
+				<div class="form-left">用户状态</div>
+				<div class="form-right">
+					<div class="form-input-radio">
+						<label>
+							<input type="radio" checked name="status" value="1"/>
+							开启
+						</label>
+					</div>
+					<div class="form-input-radio">
+						<label>
+							<input type="radio" name="status" value="2"/>
+							禁用
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-operate">
+				<button class="form-button color-bg-green">保存</button>
+				<button class="form-button color-bg-grey" onclick="history.go(-1);">取消</button>
+			</div>
+		</div>
+        </form>
+	</div>
+</div>
+<div class="main-foot">Copyright  2013-2015 WeiGouTong.com. All Rights Reserved.  苏ICP备09098830号</div>
+
+</body>
+<script type="text/javascript">
+    	$("form").submit(function(){
+    		var self = $(this);
+    		$.post(self.attr("action"), self.serialize(), success, "json");
+    		return false;
+
+    		function success(data){
+				if(data.status == 0){
+					layer.msg(data.info, {icon: 5,time: 2000 });  
+				}else{
+					layer.msg(data.info, {icon: 1,time: 2000 }, function(){history.go(-1);});  
+				}
+    		}
+    	});
+</script>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="pragram" content="no-cache">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>抢单</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <link href="__PUBLIC__/Home/css/iconfont.css" rel="stylesheet" type="text/css">
+    <link href="__PUBLIC__/Home/css/style.css" rel="stylesheet" type="text/css">
+    <script src="__PUBLIC__/Home/js/jquery-1.11.1.min.js"></script>
+
+</head>    
+<body>
+    <div class="head flexBox headSearch" >
+        <a href="javascript:;" class="iconfont icon-zuo"></a>
+        <div class="logoTitle">人人配送</div>
+        <a href="javascript:;" class="r addPos"><i class="iconfont icon-dingwei"></i>苏州</a>
+    </div>
+    <div class="voteNav">
+        <a <if condition="$_GET['status'] eq 2">class="active"</if> href="{:U('Order/getlist',array('status'=>2,'id'=>$UserInfo['id'],'openid'=>$UserInfo['openid']))}">进行中的任务</a>
+        <a <if condition="$_GET['status'] eq 3">class="active"</if> href="{:U('Order/getlist',array('status'=>3,'id'=>$UserInfo['id'],'openid'=>$UserInfo['openid']))}">历史记录</a>
+    </div>
+    <ul class="addlist mb30">
+        <volist name="PackageList" id="vo">
+        <li>
+            <a href="{:U('Order/rob',array('id'=>$vo['id'],'status'=>$_GET['status']))}">
+                <div class="addHead">
+                    <span>创建时间:</span>
+                    <font>{$vo.createtime|date="Y-m-d H:i:s",###}</font>
+                    <eq name="vo.status" value="2">
+                    <div class="r">配送中</div>
+                    <else />
+                    <div class="r color-grey">已完成</div>
+                    </eq>
+                </div>
+                <div class="addContent">
+                    <div>
+                        <span>配送单号</span>
+                        {$vo.number}
+                    </div>
+                    <div>
+                        <span>送货区域</span>
+                        {$vo.Ranges.range_name}
+                        <div class="r">
+                            赏金<font>￥{$vo.price}</font>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </li>
+        </volist>
+    </ul>
+    <div class="footNav">
+        <a href="{:U('Order/pond',array('status'=>1,'id'=>$UserInfo['id'],'openid'=>$UserInfo['openid']))}" >
+            <i class="iconfont icon-allorder"></i>
+            <div>抢单池</div>
+        </a>
+        <a href="javascript:;" class="active">
+            <i class="iconfont icon-daishouhuo"></i>
+            <div>我的任务</div>
+        </a>
+        <a href="{:U('Personal/agreement',array('openid'=>$UserInfo['openid']))}">
+            <i class="iconfont icon-ren-copy"></i>
+            <div>个人中心</div>
+        </a>
+    </div>
+</body>
+</html>

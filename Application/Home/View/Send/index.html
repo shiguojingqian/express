@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="pragram" content="no-cache">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>账户信息</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <link href="__PUBLIC__/Home/css/iconfont.css" rel="stylesheet" type="text/css">
+    <link href="__PUBLIC__/Home/css/style.css" rel="stylesheet" type="text/css">
+    <script src="__PUBLIC__/Home/js/jquery-1.11.1.min.js"></script>
+    <script src="__PUBLIC__/layer/layer.js"></script>
+</head>    
+<body>
+    <div class="head flexBox headSearch" >
+        <a href="javascript:;" class="iconfont icon-zuo"></a>
+        <div class="logoTitle">人人配送</div>
+    </div>
+    <form action="{:U('Send/sendadd')}" method="POST">
+    <div class="addPosition">
+        <div class="formTitle">寄件地址</div>
+        <label class="formList">
+            寄件人
+            <input class="r" type="text" name="sender_name" placeholder="请输入寄件人" />
+        </label>
+        <label class="formList">
+            联系电话
+            <input class="r" type="tel" name="sender_mobile" placeholder="请输入电话号码" />
+        </label>
+        <div class="addPosition">
+            <label class="formList">
+                市
+                <select class="change" name="sender_city[]">
+                    <option value=''>请选择</option>
+                    <volist name="RegionList" id="vo">
+                    <option value="{$vo.id}">{$vo.city}</option>
+                    </volist>
+                </select>
+                <div class="r">请选择</div>
+            </label>
+            <label class="formList">
+                区
+                <select class="change" name="sender_city[]">
+                    <option value=''>请选择</option>
+                </select>
+                <div class="r">请选择</div>
+            </label>
+            <label class="formList">
+                镇
+                <select class="change" name="sender_city[]">
+                    <option value=''>请选择</option>
+                </select>
+                <div class="r">请选择</div>
+            </label>
+            <label class="formList">
+                村
+                <select class="change" name="sender_city[]" id="rid">
+                    <option value=''>请选择</option>
+                </select>
+                <div class="r">请选择</div>
+            </label>
+            <label class="formList">
+                详细地址
+                <input class="r" type="text" name="sender_address_detail" placeholder="请输入详细地址" />
+            </label>
+        </div>
+    </div>
+    
+    <div class="addPosition">
+     <div class="formTitle">收件地址</div>
+        <label class="formList">
+            联系人
+            <input class="r" type="text" name="receiver_name" placeholder="请输入联系人姓名" />
+        </label>
+        <label class="formList">
+            手机号码
+            <input class="r" type="tel" name="receiver_mobile" placeholder="请输入手机号码" />
+        </label>
+        
+        <label class="formList">
+            市
+            <select class="change" name="receiver_city[]">
+                <option value=''>请选择</option>
+                <volist name="RegionList" id="vo">
+                <option value="{$vo.id}">{$vo.city}</option>
+                </volist>
+            </select>
+            <div class="r">请选择</div>
+        </label>
+        <label class="formList">
+            区
+            <select class="change" name="receiver_city[]">
+                <option value=''>请选择</option>
+            </select>
+            <div class="r">请选择</div>
+        </label>
+        <label class="formList">
+            镇
+            <select class="change" name="receiver_city[]">
+                <option value=''>请选择</option>
+            </select>
+            <div class="r">请选择</div>
+        </label>
+        <label class="formList">
+            村
+            <select class="change" name="receiver_city[]" id="rid">
+                <option value=''>请选择</option>
+            </select>
+            <div class="r">请选择</div>
+        </label>
+        <label class="formList">
+            详细地址
+            <input class="r" type="text" name="receiver_address_detail" placeholder="请输入详细地址" />
+        </label>
+    </div>
+    <input class="btnA marginTopLittle" type="submit" value="下一步" />
+    </form>
+</body>
+    <script>
+        $(".formList select").change(function(){
+            $(this).siblings("div.r").text($(this).children("option:selected").text());
+        })
+        $(".change").change(function(){
+            var id = $(this).val();
+            var self = $(this);
+            var html = '<option value="">请选择</option>';
+            if(id != ''){
+                $.ajax({
+                    url: "{:U('Personal/select')}" ,  
+                    type: 'POST',  
+                    data: {'id':id},
+                    async: false,
+                    dataType: 'json',
+                    success: function (data) {
+                        var datalength = data.info.length;
+                        self.parent('.formList').nextAll('.formList').find('select').html(html);
+                        if(datalength >= 1){
+                            for(var i=0;i<datalength;i++){
+                               html += "<option value='"+data.info[i]['id']+"' data-rid='"+data.info[i]['range_id']+"'>"+data.info[i]['city']+"</option>";
+                            }
+                            self.parent('.formList').next('.formList').find('select').html(html);
+                            self.parent('.formList').nextAll('.formList').find('.r').html("请选择");
+                        }
+                    }
+                });
+            }else{
+                self.parent('.formList').nextAll('.formList').find('select').html(html);
+                self.parent('.formList').nextAll('.formList').find('.r').html("请选择");
+            }
+        });
+    </script>
+        <script type="text/javascript">
+    	$("form").submit(function(){
+    		var self = $(this);
+    		$.post(self.attr("action"), self.serialize(), success, "json");
+    		return false;
+
+    		function success(data){
+				if(data.status == 0){
+					layer.msg(data.info, {icon: 5,time: 2000 });  
+				}else{
+					layer.msg(data.info, {icon: 1,time: 2000 }, function(){location.href=data.url;});  
+				}
+    		}
+    	});
+    </script>
+</html>

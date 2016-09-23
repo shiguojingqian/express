@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="pragram" content="no-cache">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>抢单列表</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <link href="__PUBLIC__/Home/css/iconfont.css" rel="stylesheet" type="text/css">
+    <link href="__PUBLIC__/Home/css/style.css" rel="stylesheet" type="text/css">
+    <script src="__PUBLIC__/Home/js/jquery-1.11.1.min.js"></script>
+    <script src="__PUBLIC__/layer/layer.js"></script>
+</head>    
+<body>
+    <div class="head flexBox headSearch" >
+        <a href="javascript:;" class="iconfont icon-zuo"></a>
+        <div class="logoTitle">人人配送</div>
+        <!-- <a href="javascript:;" class="r addPos"><i class="iconfont icon-dingwei"></i>苏州</a> -->
+    </div>
+    <div class="addHead mt5">
+        配送单号:{$PackageInfo.number}
+        <font>{$PackageInfo.createtime|date="Y-m-d H:i:s",###}</font>
+        <div class="r"><eq name="PackageInfo.status" value="2">配送中</eq><eq name="PackageInfo.status" value="3">已完成</eq></div>
+    </div>
+    
+    <notempty name="OrderList">
+    <div class="addHead mt5">
+        快递业务
+    </div>
+    <ul class="addOrderList">
+        <volist name="OrderList" id="vo">
+        <li>
+            <div>
+                订单编号:{$vo.sendgoodno}
+                <eq name="vo.status" value="3">
+                <a href="{:U('Order/iddetail',array('id'=>$vo['id']))}">待取货</a>
+                <else />
+                <a class="bg-grey" href="{:U('Order/iddetail',array('id'=>$vo['id']))}"><neq name="vo.status" value="4">已取货<else />已完成</neq></a>
+                </eq>
+            </div>
+            <div>取件地址: <span>{$vo.Dot.address}</span></div>
+            <div>收件地址: <span>{$vo.city_id_list.0.city}{$vo.city_id_list.1.city}{$vo.city_id_list.2.city}{$vo.city_id_list.3.city}{$vo.address}</span></div>
+        </li>
+        </volist>
+    </ul>
+    </notempty>
+
+    <notempty name="SendList">
+    <div class="addHead mt5">
+        寄件业务
+    </div>
+    <ul class="addOrderList">
+        <volist name="SendList" id="vo">
+        <li>
+            <div>
+                订单编号:{$vo.number}
+                <eq name="vo.status" value="3">
+                <a href="{:U('Send/order',array('id'=>$vo['id'],'type'=>jijian))}">待取货</a>
+                <else />
+                <a class="bg-grey" href="{:U('Send/order',array('id'=>$vo['id'],'type'=>jijian))}"><neq name="vo.status" value="4">已取货<else />已完成</neq></a>
+                </eq>
+            </div>
+            <div>取件地址: <span>{$vo.sender_city}--{$vo.sender_address_detail}</span></div>
+            <div>收件地址: <span>{$vo.receiver_city}{$vo.receiver_address_detail}</span></div>
+        </li>
+        </volist>
+    </ul>
+    </notempty>
+    <neq name="PackageInfo.status" value="3">
+        <a class="btnA mt30">确认完成</a>
+    <else />
+        <a class="btnA">已完成</a>
+    </neq>
+</body>
+<script>
+$(".mt30").click(function(){
+    $.ajax({
+       type: "POST",
+       url: "{:U('Order/complete')}",
+       data: {id:"{$PackageInfo.id}",number:"{$PackageInfo.number}"},
+       dataType: 'json',
+       success: function(data){
+            if(data.status == 0){
+                layer.msg(data.info, {icon: 5,time: 2000 });  
+            }else{
+                layer.msg(data.info, {icon: 1,time: 2000 }, function(){history.go(-1);});  
+            }
+       }
+    });
+});
+</script>
+</html>

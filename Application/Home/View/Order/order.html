@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="pragram" content="no-cache">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>订单</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <link href="__PUBLIC__/Home/css/iconfont.css" rel="stylesheet" type="text/css">
+    <link href="__PUBLIC__/Home/css/style.css" rel="stylesheet" type="text/css">
+    <script src="__PUBLIC__/Home/js/jquery-1.11.1.min.js"></script>
+    
+</head>    
+<body>
+    <div class="head flexBox headSearch" >
+        <a href="javascript:;" class="iconfont icon-zuo"></a>
+        <div class="logoTitle">人人配送</div>
+    </div>
+    <div class="orderNav">
+        <a <if condition="$_GET['status'] neq 1">class="active"</if> href="{:U('Order/order')}">待取货</a>
+        <a <if condition="$_GET['status'] eq 1">class="active"</if> href="{:U('Order/order',array('status'=>1))}">已取货</a>
+    </div>
+    <ul class="paddingBottom">
+        <volist name="OrderList" id="vo">
+        <li>
+            <div class="orderHead">
+                单号：{$vo.sendgoodno}
+<!--                 <div class="r">
+                    <span>货柜 1</span>
+                    <span>货柜 28</span>
+                </div> -->
+            </div>
+            <div class="flexBoxGroup">
+                <div class="flexBox">
+                    <div class="iconfont icon-dingwei"></div>
+                    <div class="flexChild">
+                        <div>{$vo.dot_name} {$vo.phone}</div>
+                        <div>{$vo.address}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="listFoot">
+                {$vo.createtime}
+                <!-- <a href="{:U('Order/details',array('id'=>$vo['id']))}">1元送上门</a> -->
+                <a href="__MODULE__/Order/details?id={$vo.id}"><eq name="vo.status" value="1">进行中<else />送货上门</eq></a>
+            </div>
+        </li>
+        </volist>
+    </ul>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="pragram" content="no-cache">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>新建地址</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <link href="__PUBLIC__/Home/css/iconfont.css" rel="stylesheet" type="text/css">
+    <link href="__PUBLIC__/Home/css/style.css" rel="stylesheet" type="text/css">
+    <script src="__PUBLIC__/Home/js/jquery-1.11.1.min.js"></script>
+
+</head>    
+<body>
+    <div class="head flexBox headSearch" >
+        <a href="javascript:;" class="iconfont icon-zuo"></a>
+        <div class="logoTitle">人人配送</div>
+    </div>
+    <div class="addPosition">
+        <label class="formList">
+            联系人
+            <input class="r" type="text" placeholder="请输入联系人姓名" />
+        </label>
+        <label class="formList">
+            性别
+            <select name="sex">
+                <option value="">请选择</option>
+                <option value="1">男</option>
+                <option value="2">女</option>
+            </select>
+            <div class="r">请选择</div>
+        </label>
+        <label class="formList">
+            手机号码
+            <input class="r" type="tel" placeholder="请输入手机号码" />
+        </label>
+        <label class="formList">
+            收货地址
+            <button class="r" id='showCityPicker3' type='button'>请选择地址<i class="iconfont icon-dingwei"></i></button>
+        </label>
+        <label class="formList">
+            详细地址
+            <input class="r" type="text" placeholder="请输入详细地址" />
+        </label>
+        <label class="formList">
+            标签
+            <select>
+                <option>请选择</option>
+                <option>家</option>
+                <option>女</option>
+            </select>
+            <div class="r">请选择</div>
+        </label>
+    </div>
+    <input class="btnA" type="submit" value="保&nbsp;&nbsp;存" />
+    <script type="text/javascript">
+        $(".formList select").change(function(){
+            $(this).siblings("div.r").text($(this).children("option:selected").text());
+        })
+    </script>
+    <script src="__PUBLIC__/Home/js/mui.min.js"></script>
+    <link href="__PUBLIC__/Home/css/mui.min.css" rel="stylesheet" type="text/css">
+    <link href="__PUBLIC__/Home/css/mui.picker.css" rel="stylesheet" />
+    <link href="__PUBLIC__/Home/css/mui.poppicker.css" rel="stylesheet" />
+    <script src="__PUBLIC__/Home/js/mui.picker.js"></script>
+    <script src="__PUBLIC__/Home/js/mui.poppicker.js"></script>
+    <script src="__PUBLIC__/Home/js/city.data-3.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+        (function($, doc) {
+            $.init();
+            $.ready(function() {
+                            //级联示例
+                var cityPicker3 = new $.PopPicker({
+                    layer: 3
+                });
+                cityPicker3.setData(cityData3);
+                var showCityPickerButton = doc.getElementById('showCityPicker3');
+                showCityPickerButton.addEventListener('tap', function(event) {
+                    cityPicker3.show(function(items) {
+                        showCityPickerButton.innerText = (items[0] || {}).text + " " + (items[1] || {}).text + " " + (items[2] || {}).text;
+                        //返回 false 可以阻止选择框的关闭
+                        //return false;
+                    });
+                }, false);
+            });
+        })(mui, document);
+    </script>
+</body>
+</html>

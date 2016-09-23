@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="pragram" content="no-cache">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>资料填写</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <link href="__PUBLIC__/Home/css/iconfont.css" rel="stylesheet" type="text/css">
+    <link href="__PUBLIC__/Home/css/style.css" rel="stylesheet" type="text/css">
+    <script src="__PUBLIC__/Home/js/jquery-1.11.1.min.js"></script>
+    <script src="__PUBLIC__/layer/layer.js"></script>
+</head>    
+<body>
+    <div class="head flexBox headSearch" >
+        <a href="javascript:;" class="iconfont icon-zuo"></a>
+        <div class="logoTitle">人人配送</div>
+    </div>
+    <form action="{:U('Personal/registeredexpress')}" method="">
+    
+    <div class="addPosition">
+        <label class="formList">
+            姓名
+            <input class="r" type="text" name="name" placeholder="请输入姓名" />
+        </label>
+        <label class="formList">
+            身份证号
+            <input class="r" type="tel" name="identity" placeholder="请输入身份证号码" />
+        </label>
+<!--         <label class="formList">
+            确认身份证号
+            <input class="r" type="tel" placeholder="请输入身份证号码" />
+        </label> -->
+        <label class="formList">
+            紧急联系人
+            <input class="r" type="text" name="urgent" placeholder="请输入紧急联系人" />
+        </label>
+        <label class="formList">
+            联系人电话
+            <input class="r" type="tel" name="urgent_phone" placeholder="请输入手机号码" />
+        </label>
+        <label class="formList">
+            学历
+            <select name="education">
+                <option value="">请选择</option>
+                <option>本科</option>
+                <option>大专</option>
+            </select>
+            <div class="r">请选择</div>
+        </label>
+       <label class="formList">
+            职业
+            <input class="r" type="text" name="occupation" placeholder="请输入职业" />
+        </label>
+        <a class="formList qy" href="{:U('Personal/select')}">
+            出行方式
+            <div class="r">请选择</div>
+            <input class="r" type="hidden" name="carrying" value="" />
+        </a>
+        <label class="formList">
+            现居地址
+            <textarea placeholder="请输入详细地址" name="address"></textarea>
+        </label>
+    </div>
+    <div class="fileUp">
+        <div>请依照参考图片样式上传图片</div>
+        <label class="example" style="background-image: url(__PUBLIC__/Home/images/example.jpg);">
+            <div>参考图片样式</div>
+        </label>
+        <label class="example pic" style="background-image: url(__PUBLIC__/Home/images/ex1.jpg);">
+            <input name="id_a" type="hidden" value="" />
+            <div>你的照片</div>
+        </label>
+    </div>
+    <div class="fileUp pbn pbm">
+        <div>请上传身份证图片</div>
+        <label class="example l" style="background-image: url(__PUBLIC__/Home/images/example.jpg);">
+            <div>参考图片样式</div>
+        </label>
+        <label class="example r pic" style="background-image: url(__PUBLIC__/Home/images/em4.jpg);">
+            <input name="id_b" type="hidden" value="" />
+            <div>你的照片</div>
+        </label>
+    </div>
+    <div class="fileUp pbn pbm">
+        <div>请上传身份证图片</div>
+        <label class="example l" style="background-image: url(__PUBLIC__/Home/images/example.jpg);">
+            <div>参考图片样式</div>
+        </label>
+        <label class="example r pic" style="background-image: url(__PUBLIC__/Home/images/em4.jpg);">
+            <input name="id_c" type="hidden" value="" />
+            <div>你的照片</div>
+        </label>
+    </div>
+    <div class="fileUp pbn pbm">
+        <div>请上传身份证图片</div>
+        <label class="example l" style="background-image: url(__PUBLIC__/Home/images/example.jpg);">
+            <div>参考图片样式</div>
+        </label>
+        <label class="example r pic" style="background-image: url(__PUBLIC__/Home/images/em4.jpg);">
+            <input name="id_d" type="hidden" value="" />
+            <div>你的照片</div>
+        </label>
+    </div>
+    <div class="addPosition">
+        <label class="formList">
+            从哪里知道人人速配的？
+            <select name="source">
+                <option value="">请选择</option>
+                <option>58同城</option>
+                <option>赶集网</option>
+            </select>
+            <div class="r">请选择</div>
+        </label>
+    </div>
+    <input class="btnA marginTopLittle" type="submit" value="下一步" />
+    </form>
+    <script type="text/javascript">
+        var rid = localStorage.getItem('rid');
+        if(rid)
+        {
+            $.ajax({
+                url: "{:U('Personal/ajaxrange')}" ,  
+                type: 'POST',  
+                data: {'id':rid},
+                async: false,  
+                dataType: 'json',
+                success: function (data) {
+                    $(".qy").find(".r").html(data.info['range_name']);
+                     $(".qy").find("input").val(data.info['id']);
+                }
+            });
+        }
+        $(".formList select").change(function(){
+            $(this).siblings("div.r").text($(this).children("option:selected").text());
+        })
+    </script>
+    <script type="text/javascript">
+    	$("form").submit(function(){
+    		var self = $(this);
+    		$.post(self.attr("action"), self.serialize(), success, "json");
+    		return false;
+
+    		function success(data){
+				if(data.status == 0){
+					layer.msg(data.info, {icon: 5,time: 2000 });  
+				}else{
+					layer.msg(data.info, {icon: 1,time: 2000 }, function(){location.href=data.url;});  
+				}
+    		}
+    	});
+</script>
+</body>
+<script type='text/javascript' src='http://res.wx.qq.com/open/js/jweixin-1.0.0.js?cssJsVersion={$cssJsVersion}'></script>
+<script type='text/javascript'>
+var share_appId = '{$signPackage['appId']}';
+var share_timestamp = '{$signPackage['timestamp']}';
+var share_nonceStr = '{$signPackage['nonceStr']}';
+var share_signature = '{$signPackage['signature']}';
+<literal>
+	wx.config({
+		debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+		appId: share_appId, // 必填，公众号的唯一标识
+		timestamp: share_timestamp, // 必填，生成签名的时间戳
+		nonceStr: share_nonceStr, // 必填，生成签名的随机串
+		signature: share_signature,// 必填，签名，见附录1
+		jsApiList: ['chooseImage','uploadImage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+	});
+	wx.ready(function () {
+        $(".pic").click(function(){
+            var self = $(this);
+            wx.chooseImage({
+                count: 1, // 默认9
+                sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+                sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+                success: function (res) {
+                    var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+                    console.log(localIds);
+                    wx.uploadImage({
+                        localId: localIds[0], // 需要上传的图片的本地ID，由chooseImage接口获得
+                        isShowProgressTips: 1, // 默认为1，显示进度提示
+                        success: function (res) {
+                            var serverId = res.serverId; // 返回图片的服务器端ID
+                            self.find('input').val(serverId);
+                            self.css('background-image','url('+localIds+')');
+                        }
+                    });
+                }
+            });
+        });
+	});
+    
+	wx.error(function(res){
+	//alert('微信分享js-sdk验证失败');
+		// config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
+	});
+</literal>
+</script>
+</html>

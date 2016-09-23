@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="pragram" content="no-cache">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>后台登录</title>
+    <script type="text/javascript" src="__PUBLIC__/Admin/js/jquery-1.11.1.min.js"></script>
+    <style>
+		
+   		 .homeAdminContent{position: absolute;left:0;right: 0;bottom: 0;top:0;min-width: 1100px;min-height: 600px;}
+        .footCopyright{position: absolute;left:0;right: 0;bottom: 0;line-height:35px;color:#fff;color:rgba(255,255,255,0.7);background-color:#333;background-color:rgba(0,0,0,0.5);font-size:12px;text-align: center;}
+        .homeAdmin{position: absolute;left:0;right: 0;top: 0;bottom:0;background-size: cover;background-position: center;background-repeat: no-repeat;background-image: url(__PUBLIC__/Admin/images/homeAdminBg.jpg);min-width: 1100px;text-align: center;}
+        .homeAdmin>span{display: inline-block;height: 100%;vertical-align: middle;}
+        .adminLoginForm{display: inline-block;vertical-align: middle;color:#fff;background-color: #fff;background-color: rgba(0,0,0,0.4);width:500px;padding:30px 0 40px 0;border-radius: 10px;}
+        .adminlogoHead{width:220px;margin-bottom:17px;}
+        .adminForm{display:block;width:330px;margin:0 auto;margin-bottom:22px;border-radius: 5px;border:1px solid #fff;height: 45px;}
+        input.adminForm{color:#fff;background-color:#e7cd02;border: none;font-size:16px;font-weight: bold;outline: none;margin-top:50px; }
+        input.adminForm:hover{background-color: #CDBC38;color:#333;}
+        .adminForm img{float:left;width:28px;margin-top:7px;margin-left:8px;}
+        .adminForm input{float:right;height:28px;width:283px;margin-top:7px;background-color: transparent;color:#fff;border: none;outline: none;text-indent: 10px;border-left: 1px solid #fff;font-size:15px;}
+    </style>
+</head>    
+<body>
+	<div class="homeAdminContent">
+		<div class="homeAdmin">
+			<span></span>
+           
+			<div class="adminLoginForm">
+             <form method="POST" action="{:U('Login/checkuser')}">
+				<!-- <img class="adminlogoHead" src="images/logoHead.png"/> -->
+				<label class="adminForm">
+					<img src="__PUBLIC__/Admin/images/phone-white.png"/>
+					<input name="username" autocomplete="off" type="text" placeholder="请输入手机号" />
+				</label>
+				<label class="adminForm">
+					<img src="__PUBLIC__/Admin/images/adminsuo.png"/>
+					<input name="password" autocomplete="off" type="password" placeholder="请输入密码"/>
+				</label>
+				<input type="button" class="adminForm" id="adminForm" value="登  录"></input>
+             </form>
+			</div>
+           
+		</div>
+   		<div class="footCopyright">Copyright 2011-2016 苏州关爱健康信息科技有限公司　版权所有　苏ICP备14001113号-1</div>
+    </div>
+    <script type="text/javascript">
+        $("#adminForm").click(function(){
+            var self = $("form");
+            $.post(self.attr("action"), self.serialize(), success, "json");
+            return false;
+
+            function success(data){
+                if(data.status == 0){
+                    alert(data.info);
+                }else{
+                   window.location.href = data.url;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

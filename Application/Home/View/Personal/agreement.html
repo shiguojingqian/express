@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="pragram" content="no-cache">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>我的信息</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <link href="__PUBLIC__/Home/css/iconfont.css" rel="stylesheet" type="text/css">
+    <link href="__PUBLIC__/Home/css/style.css" rel="stylesheet" type="text/css">
+    <script src="__PUBLIC__/Home/js/jquery-1.11.1.min.js"></script>
+
+</head>    
+<body>
+    <div class="head flexBox headSearch" >
+        <a href="javascript:;" class="iconfont icon-zuo"></a>
+        <div class="logoTitle">人人配送</div>
+    </div>
+    <div class="agreement">
+        <div class="agreementTitle">合作协议</div>
+        <div>
+            甲方：<span>人人速配平台</span><br>
+            乙方：<span>快递员</span><br><br>
+            <span>一、合作内容：</span><br>
+            甲方向乙方提供取、送货服务的信息，乙方收到前述信息后为用户提供取、送货服务（以下简称“取送服务”）。<br><br>
+            <span>一、合作内容：</span><br>
+            1. 甲方应符合如下条件：具备法人企业经营和服务资质，且能够向乙方出示合法有效的营业执照副本。<br>
+            2. 乙方应符合如下条件：<br>
+            <div style="padding-left: 0.3rem;">
+            （1）若为女性，则年龄应满18周岁且不超过45周岁；若为男性，   
+            则年龄应满18周岁且不超过55周岁；<br>
+            （2）身体健康；<br>
+            （3）衣着得体，言谈亲切，举止大方；<br>
+            （4）需能向甲方提供合法有效的身份证等有效证件；<br>
+            （5）不属于被甲方永久禁闭系统账户（指甲方为乙方开设的快 
+            递员系统账户，一下简称“系统账户”）的人员。<br>
+            （6）必须使用合法、合规且证件齐全的交通工具；同时需具备使
+            用这些交通工具的资质。<br>
+            </div>
+            3. 甲乙双方在此确认，其对上述合作条件已明确知悉并认可。<br><br>
+            <span>三、合作流程：</span><br>
+            1. 甲方接受用户信息后应通知乙方服务内容，包括取货地点、送货地点、距离、价格等相关信息。<br>
+            2. 乙方收到前述信息后，应依据本协议提供取送服务。<br><br>
+
+            <span>四、合作服务中双方的权利和义务：</span><br>
+              （一）甲方的权利和义务<br>
+              1. 甲方应根据用户需求，合理调配取送任务。<br>
+        </div>
+    </div>
+    <div class="footBtnGroup">
+        <a class="l" href="javascript:;" onclick="history.go(-1)">退出</a>
+        <a class="r" href="{:U('Personal/registeredexpress',array('openid'=>$UserInfo['openid']))}">同意</a>
+    </div>
+</body>
+<script>
+localStorage.removeItem('rid');
+</script>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="pragram" content="no-cache">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>订单进度</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <link href="__PUBLIC__/Home/css/iconfont.css" rel="stylesheet" type="text/css">
+    <link href="__PUBLIC__/Home/css/style.css" rel="stylesheet" type="text/css">
+    <script src="__PUBLIC__/Home/js/jquery-1.11.1.min.js"></script>
+
+</head>    
+<body>
+    <div class="head" >
+        <a href="javascript:;" class="iconfont icon-zuo"></a>
+        <div class="logoTitle">人人配送</div>
+        <a href="javascript:;" class="r iconfont icon-tousuguanli"></a>
+    </div>
+    <div class="progressList">
+
+    
+        <neq name="OrderListInfo.code" value="">
+        <div class="progress flexBox">
+            <div class="left">
+                <i class="iconfont icon-suo"></i>
+            </div>
+            <div class="right flexChild">
+                <div>
+                    <div class="rightTime">{$OrderListInfo.pay_time|date="Y-m-d H:i:s",###}</div>
+                    <div class="rightContent">取件密码：{$OrderListInfo.code}</div>
+                    <div class="rightNotice">为了您的物品安全，请配送员上门后再出示您的取件密码</div>
+                </div>
+            </div>
+        </div>
+        </neq>
+        <if condition="$packageInfo.user_id neq 0">
+        <div class="progress flexBox">
+            <div class="left">
+                <i class="iconfont icon-truckfuzhi"></i>
+            </div>
+            <div class="right flexChild border-red">
+                <div>
+                    <div class="rightTime">{$OrderListInfo.pay_time|date="Y-m-d H:i:s",###}</div>
+                    <div class="rightContent"></div>
+                    <div class="workerInfo flexBox">
+                        <div class="bg-cover" style="background-image:url(__PUBLIC__/imgwx/{$UserInfoPs.Archives.id_a});"></div>
+                        <div class="flexChild">
+                            <div>
+                                {$UserInfoPs.Archives.name}
+                                <span>{$UserInfoPs.username}</span>
+                            </div>
+                            <div class="cf">
+                                服务次数：{$count}次
+                                <div class="r">
+                                    <i class="iconfont icon-wujiaoxing icon-iconfontshiwujiaoxing"></i>
+                                    <i class="iconfont icon-wujiaoxing icon-iconfontshiwujiaoxing"></i>
+                                    <i class="iconfont icon-wujiaoxing icon-iconfontshiwujiaoxing"></i>
+                                    <i class="iconfont icon-wujiaoxing icon-iconfontshiwujiaoxing"></i>
+                                    <i class="iconfont icon-wujiaoxing icon-iconfontshiwujiaoxing"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </if>
+        <eq name="OrderListInfo.pay_type" value="1">
+        <div class="progress flexBox">
+            <div class="left">
+                <i class="iconfont icon-shijian"></i>
+            </div>
+            <div class="right flexChild">
+                <div>
+                    <div class="rightTime">{$OrderListInfo.pay_time|date="Y-m-d H:i:s",###}</div>
+                    <div class="rightContent">下单成功.系统处理中</div>
+                </div>
+            </div>
+        </div>
+        <div class="progress flexBox">
+            <div class="left">
+                <i class="iconfont icon-wodegongzi"></i>
+            </div>
+            <div class="right flexChild">
+                <div>
+                    <div class="rightTime">{$OrderListInfo.pay_time|date="Y-m-d H:i:s",###}</div>
+                    <div class="rightContent">已支付<br/>快递单号:{$OrderListInfo.sendgoodno}</div>
+                </div>
+            </div>
+        </div>
+        </eq>
+    </div>
+</body>
+</html>

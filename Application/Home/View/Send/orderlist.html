@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="pragram" content="no-cache">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>我的配送单</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <link href="__PUBLIC__/Home/css/iconfont.css" rel="stylesheet" type="text/css">
+    <link href="__PUBLIC__/Home/css/style.css" rel="stylesheet" type="text/css">
+    <script src="__PUBLIC__/Home/js/jquery-1.11.1.min.js"></script>
+
+</head>    
+<body>
+    <div class="head flexBox headSearch" >
+        <a href="javascript:;" class="iconfont icon-zuo"></a>
+        <div class="logoTitle">人人配送</div>
+    </div>
+     <div class="orderNav three">
+        <a <if condition="$_GET['evaluate'] eq ''">class="active"</if> href="{:U('Send/orderlist')}">
+            <i class="iconfont icon-qujian"></i>
+            全部订单
+        </a>
+        <a <if condition="$_GET['evaluate'] eq '0'">class="active"</if> href="{:U('Send/orderlist',array('evaluate'=>0))}">
+            <i class="iconfont icon-hua"></i>
+            待评价
+        </a>
+        <a <if condition="$_GET['evaluate'] eq 1">class="active"</if> href="{:U('Send/orderlist',array('evaluate'=>1))}">
+            <i class="iconfont icon-yiwanchengwode"></i>
+            已完成
+        </a>
+    </div>
+    <ul class="orderList">
+        <volist name="SendInfo" id="vo">
+        <li>
+            <div class="ordernum">
+                订单编号：{$vo.number}
+                <span class="r">{$vo.createtime|date="Y-m-d H:i:s",###}</span>
+            </div>
+            <div class="flexBoxList">
+                <div class="flexBox">
+                    <div class="iconfont icon-dingwei"></div>
+                    <div class="flexChild">
+                        寄件地址:{$vo.sender_city}——{$vo.sender_address_detail} 
+                    </div>
+                </div>
+                <div class="flexBox">
+                    <div class="iconfont icon-mudedi"></div>
+                    <div class="flexChild">
+                        收件地址:{$vo.receiver_city}——{$vo.receiver_address_detail}  
+                    </div>
+                </div>
+                <div class="cf">
+                    合计<span>￥{$vo.price}</span>
+                    <eq name="vo.pay_type" value="0">
+                        <a class="r" href="__MODULE__/Send/order?id={$vo.id}">待支付</a>
+                    <else />
+                        <if condition="$vo.evaluate eq 0 and $vo.status eq 4">
+                            <a class="r" href="__MODULE__/Send/evaluate?id={$vo.id}">去评价</a>
+                        <elseif condition="$vo.evaluate eq 1" />
+                            <a class="r" href="__MODULE__/Send/evaluate?id={$vo.id}">已完成</a>
+                        <elseif condition="$vo.evaluate eq 0 and $vo.status neq 4" />
+                            <a class="r" href="__MODULE__/Send/order?id={$vo.id}" style="margin-left: 0.5rem"><eq name="vo.status" value="1">处理中</eq><eq name="vo.status" value="2">已发布</eq><eq name="vo.status" value="3">已接单</eq><eq name="vo.status" value="6">配送中</eq></a>
+                        </if>
+                    </eq>
+                </div>
+            </div>
+        </li>
+        </volist>
+    </ul>
+</body>
+</html>

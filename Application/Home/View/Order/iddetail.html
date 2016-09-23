@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="pragram" content="no-cache">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>抢单列表</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <link href="__PUBLIC__/Home/css/iconfont.css" rel="stylesheet" type="text/css">
+    <link href="__PUBLIC__/Home/css/style.css" rel="stylesheet" type="text/css">
+    <script src="__PUBLIC__/Home/js/jquery-1.11.1.min.js"></script>
+    <script src="__PUBLIC__/layer/layer.js"></script>
+</head>    
+<body>
+    <div class="head flexBox headSearch" >
+        <a href="javascript:;" class="iconfont icon-zuo"></a>
+        <div class="logoTitle">人人配送</div>
+        <!-- <a href="javascript:;" class="r addPos"><i class="iconfont icon-dingwei"></i>苏州</a> -->
+    </div>
+    <div class="addHead mt5">
+        快递单号:{$OrderList.sendgoodno}
+        <font>{$OrderList.createtime|date="Y-m-d H:i:s",###}</font>
+        <div class="r"><eq name="OrderList.status" value="3">未取货</eq><eq name="OrderList.status" value="4">已完成</eq><eq name="OrderList.status" value="6">已取货</eq></div>
+    </div>
+    <div class="addDetail">
+        <div class="addDetailHead">
+            <i class="iconfont icon-dingwei"></i>取货信息
+            <div class="r">
+                <span>货柜 {$OrderList.Order.containercode}</span>
+            </div>
+        </div>
+        <div class="addDetailList">
+            <span>取件地址</span>{$OrderList.Dot.dot_name}
+        </div>
+        <div class="addDetailList">
+            <span>联系人</span>{$OrderList.Dot.ceo}
+        </div>
+        <div class="addDetailList">
+            <span>电&nbsp;&nbsp;&nbsp;&nbsp;话</span>{$OrderList.Dot.phone}
+        </div>
+        <div class="addDetailList">
+            <span>地&nbsp;&nbsp;&nbsp;&nbsp;址</span>{$OrderList.Dot.address}
+        </div>
+    </div>
+    <div class="addDetail shouhuo">
+        <div class="addDetailHead">
+            <i class="iconfont icon-mudedi"></i>收货信息
+        </div>
+        <div class="addDetailList">
+            <span>联系人</span>{$OrderList.name}
+        </div>
+        <div class="addDetailList">
+            <span>电&nbsp;&nbsp;&nbsp;&nbsp;话</span>{$OrderList.phone}
+        </div>
+        <div class="addDetailList">
+            <span>地&nbsp;&nbsp;&nbsp;&nbsp;址</span>{$OrderList.city_id_list.0.city}{$OrderList.city_id_list.1.city}{$OrderList.city_id_list.2.city}{$OrderList.city_id_list.3.city}{$OrderList.address}
+        </div>
+    </div>
+    <neq name="OrderList.status" value="4">
+        <a class="btnA mt30"><eq name="OrderList.status" value="3">确认取货</eq><eq name="OrderList.status" value="6">确认送达</eq></a>
+    <else />
+         <a class="btnA"><eq name="OrderList.status" value="4">已完成</eq></a>
+    </neq>
+</body>
+<script>
+$(".mt30").click(function(){
+    $.ajax({
+       type: "POST",
+       url: "{:U('Order/ajaxsign')}",
+       data: {id:"{$OrderList.id}",status:"{$OrderList.status}"},
+       dataType: 'json',
+       success: function(data){
+            if(data.status == 0){
+                layer.msg(data.info, {icon: 5,time: 2000 });  
+            }else{
+                layer.msg(data.info, {icon: 1,time: 2000 }, function(){history.go(0);});  
+            }
+       }
+    });
+});
+</script>
+</html>

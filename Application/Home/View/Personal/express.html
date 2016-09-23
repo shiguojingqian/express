@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="pragram" content="no-cache">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>抢单列表</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <link href="__PUBLIC__/Home/css/iconfont.css" rel="stylesheet" type="text/css">
+    <link href="__PUBLIC__/Home/css/style.css" rel="stylesheet" type="text/css">
+    <script src="__PUBLIC__/Home/js/jquery-1.11.1.min.js"></script>
+
+</head>    
+<body>
+    <div class="head flexBox headSearch" >
+        <a href="javascript:;" class="iconfont icon-zuo"></a>
+        <div class="logoTitle">人人配送</div>
+        <a href="{:U('Personal/wages')}" class="r addPos">工资记录</a>
+    </div>
+    <div class="userHead2">
+        <label style="background-image: url({$UserInfo.htmlurl});" class="bg-cover">
+            <!-- <input type="file"> -->
+        </label>
+        <div class="neighbour">{$UserInfo.Archives.name}</div>
+    </div>
+    <div class="navPersonal">
+        <a href="javascript:;">
+            <div class="red">{:$yijiesuan?$yijiesuan:'0.00'}</div>
+            <div>
+                <i class="iconfont icon-integral"></i>
+                已结工资
+            </div>
+        </a>
+        <a href="javascript:;">
+            <div class="yellow">{$count}</div>
+            <div>
+                <i class="iconfont icon-icon3"></i>
+                抢单数
+            </div>
+        </a>
+        <a href="javascript:;">
+            <div class="blue">{:$weijiesuan?$weijiesuan:'0.00'}</div>
+            <div>
+                <i class="iconfont icon-wodegongzi"></i>
+                未结工资
+            </div>
+        </a>
+    </div>
+    <ul class="userNav neighbourNav mb30">
+        <li>
+            <a href="{:U('Order/getlist',array('status'=>2,'id'=>$UserInfo['id'],'openid'=>$UserInfo['openid']))}">
+                <i class="iconfont icon-icon3"></i>
+                <div>抢单数{$count}</div>
+            </a>
+        </li>
+        <li>
+            <a href="{:U('Order/getlist',array('status'=>3,'id'=>$UserInfo['id'],'openid'=>$UserInfo['openid']))}">
+                <i class="iconfont icon-yiwanchengwode"></i>
+                <div>已完成</div>
+            </a>
+        </li>
+        <li>
+            <a href="{:U('Order/getlist',array('status'=>2,'id'=>$UserInfo['id'],'openid'=>$UserInfo['openid']))}">
+                <i class="iconfont icon-daishouhuo"></i>
+                <div>待收货</div>
+            </a>
+        </li>
+    </ul>
+    <div class="footNav">
+        <a href="{:U('Order/pond',array('status'=>1,'id'=>$UserInfo['id'],'openid'=>$UserInfo['openid']))}" >
+            <i class="iconfont icon-allorder"></i>
+            <div>抢单池</div>
+        </a>
+        <a href="{:U('Order/getlist',array('status'=>2,'id'=>$UserInfo['id'],'openid'=>$UserInfo['openid']))}" >
+            <i class="iconfont icon-daishouhuo"></i>
+            <div>我的任务</div>
+        </a>
+        <a href="javascript:;" class="active">
+            <i class="iconfont icon-ren-copy"></i>
+            <div>个人中心</div>
+        </a>
+    </div>
+</body>
+</html>

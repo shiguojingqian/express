@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="pragram" content="no-cache">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>后台管理</title>
+	<link href="__PUBLIC__/Admin/css/style.css" rel="stylesheet" type="text/css">
+	<link href="__PUBLIC__/Admin/css/animate.css" rel="stylesheet" type="text/css">
+	<link href="__PUBLIC__/Admin/css/iconfont.css" rel="stylesheet" type="text/css">
+	<script src="__PUBLIC__/Admin/js/jquery-1.11.1.min.js"></script>
+	<script src="__PUBLIC__/Admin/js/publicjquery.js"></script>
+    <script src="__PUBLIC__/layer/layer.js"></script>
+</head>
+<body onselectstart="return false">
+<div class="main FromUpToDown">
+	<div class="content">
+		<div class="head-content">
+			<div class="head-title">
+				<span>角色添加</span>
+			</div>
+		</div>
+        <form action="{:U('AuthGroup/update')}" method="POST">
+		<div class="form-content">
+			<div class="form">
+				<div class="form-left">角色名称</div>
+				<div class="form-right">
+					<input class="form-input-big" name="title" type="text" placeholder="请填写" value="{$AuthGroupInfo.title}"/>
+					<div class="notice">这里填写角色名称</div>
+				</div>
+			</div>
+            
+                <div class="form">
+                    <div class="form-left">勾选操作:</div>
+                    <div class="form-right">
+                        <div class="remark" style="line-height: 33px;">
+                            <foreach name="AuthRuleList" item="vo" >
+                            <label>
+                                <input type="checkbox" name="rules[]" <in name="vo.id" value="$AuthGroupInfo['rules']">checked</in> value="{$vo.id}"/>
+                                <span></span>
+                                <span>{$vo.title}</span>
+                                 <span>&nbsp;&nbsp;&nbsp;</span>
+                            </label> 
+                            </foreach>
+                        </div>
+
+                    </div>
+                </div>
+             
+			<div class="form">
+				<div class="form-left">状态</div>
+				<div class="form-right">
+					<div class="form-input-radio">
+						<label>
+							<input type="radio" checked name="status" value="1"/>
+							开启
+						</label>
+					</div>
+					<div class="form-input-radio">
+						<label>
+							<input type="radio" name="status" value="2"/>
+							禁用
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-operate">
+				<button class="form-button color-bg-green">保存</button>
+				<button class="form-button color-bg-grey" onclick="history.go(-1);">取消</button>
+			</div>
+		</div>
+        </form>
+	</div>
+</div>
+<div class="main-foot">Copyright  2013-2015 WeiGouTong.com. All Rights Reserved.  苏ICP备09098830号</div>
+
+</body>
+<script type="text/javascript">
+    	$("form").submit(function(){
+    		var self = $(this);
+    		$.post(self.attr("action"), self.serialize(), success, "json");
+    		return false;
+
+    		function success(data){
+				if(data.status == 0){
+					layer.msg(data.info, {icon: 5,time: 2000 });  
+				}else{
+					layer.msg(data.info, {icon: 1,time: 2000 }, function(){history.go(-1);});  
+				}
+    		}
+    	});
+</script>
+</html>

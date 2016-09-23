@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="pragram" content="no-cache">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>抢单列表</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <link href="__PUBLIC__/Home/css/iconfont.css" rel="stylesheet" type="text/css">
+    <link href="__PUBLIC__/Home/css/style.css" rel="stylesheet" type="text/css">
+    <script src="__PUBLIC__/Home/js/jquery-1.11.1.min.js"></script>
+    <script src="__PUBLIC__/layer/layer.js"></script>
+</head>    
+<body>
+    <div class="head flexBox headSearch" >
+        <a href="javascript:;" class="iconfont icon-zuo"></a>
+        <div class="logoTitle">人人配送</div>
+        <!-- <a href="javascript:;" class="r addPos"><i class="iconfont icon-dingwei"></i>苏州</a> -->
+    </div>
+    <div class="addHead mt5">
+        配送单号:{$PackageInfo.number}
+        <font>{$PackageInfo.createtime|date="Y-m-d",###}</font>
+        <div class="r"><eq name="PackageInfo.status" value="1">待抢单</eq></div>
+    </div>
+    <notempty name="OrderList">
+    <div class="addHead mt5">
+        快递业务
+    </div>
+    <ul class="addOrderList">
+        <volist name="OrderList" id="vo">
+        <li>
+            <div>订单编号:{$vo.sendgoodno}</div>
+            <div>取件地址 <span>{$vo.Dot.address}</span></div>
+            <div>收件地址 <span>{$vo.city_id_list.0.city}{$vo.city_id_list.1.city}{$vo.city_id_list.2.city}{$vo.city_id_list.3.city}{$vo.address}</span></div>
+        </li>
+        </volist>
+    </ul>
+    </notempty>
+    <notempty name="SendList">
+    <div class="addHead mt5">
+        寄件业务
+    </div>
+    <ul class="addOrderList">
+        <volist name="SendList" id="vo">
+        <li>
+            <div>订单编号:{$vo.number}</div>
+            <div>取件地址 <span>{$vo.sender_city}--{$vo.sender_address_detail}</span></div>
+            <div>收件地址 <span>{$vo.receiver_city}{$vo.receiver_address_detail}</span></div>
+        </li>
+        </volist>
+    </ul>
+    </notempty>
+    <a class="btnA mt30">我要抢单</a>
+</body>
+<script>
+$(".mt30").click(function(){
+    var id = "{$PackageInfo['id']}";
+    $.ajax({
+       type: "POST",
+       url: "{:U('Order/ajaxrod')}",
+       data: {'id':id},
+       dataType:'json',
+       success: function(data){
+            if(data.status == 0){
+                layer.msg(data.info, {icon: 5,time: 2000 });  
+            }else{
+                layer.msg(data.info, {icon: 1,time: 2000 }, function(){history.go(0);});  
+            }
+       }
+    });
+});
+</script>
+</html>

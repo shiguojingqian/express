@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="pragram" content="no-cache">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>注册</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <link href="__PUBLIC__/Home/css/iconfont.css" rel="stylesheet" type="text/css">
+    <link href="__PUBLIC__/Home/css/style.css" rel="stylesheet" type="text/css">
+    <script src="__PUBLIC__/Home/js/jquery-1.11.1.min.js"></script>
+    <script src="__PUBLIC__/layer/layer.js"></script>
+</head>    
+<body>
+    <div class="loginContent">
+        <span></span>
+        
+        <div class="middleContent2 pb4">
+            <form action="{:U('Login/register')}" method="POST">
+            <label class="flexBox">
+                <i class="iconfont icon-shouji"></i>
+                <input class="flexChild" type="text" name="username" placeholder="请输入手机号" />
+            </label>
+            <label class="flexBox">
+                <i class="iconfont icon-suo"></i>
+                <input class="flexChild" type="password" name="password" placeholder="请输入密码" />
+            </label>
+            <div class="label flexBox">
+                <i class="iconfont icon-yanzhengma"></i>
+                <input class="flexChild" name="code" type="tel" placeholder="请输入验证码" />
+                <input type="button" id="code" value="获取验证码">
+            </div>
+            <div class="logoOperate cf">
+                <a class="r" href="{:U('Login/login')}">已有账号？马上登录！</a>
+            </div>
+            <input class="loginBtn" type="submit" value="注&nbsp;&nbsp;&nbsp;册" />
+            <a class="registerSwitch">
+                <label class="modelCheckbox">
+                    <input type="checkBox" name="state" value="1"/>
+                    <span class="iconfont"></span>
+                    请先阅读《人人速配在线注册协议》
+                </label>
+            </a>
+            </form>
+        </div>
+       
+    </div>
+<script type="text/javascript">
+     var move = function(e) {
+          e.preventDefault && e.preventDefault();
+          e.returnValue = false;
+          e.stopPropagation && e.stopPropagation();
+          return false;
+        }
+        //取消禁止滚动
+        function remliste() {
+          window.removeEventListener('touchmove', move);
+        }
+        //禁止滚动
+        function addliste() {
+          window.addEventListener('touchmove', move);
+        }
+        addliste();
+</script>
+<script type="text/javascript">
+    	$("form").submit(function(){
+    		var self = $(this);
+    		$.post(self.attr("action"), self.serialize(), success, "json");
+    		return false;
+
+    		function success(data){
+				if(data.status == 0){
+					layer.msg(data.info, {icon: 5,time: 2000 });  
+				}else{
+					layer.msg(data.info, {icon: 1,time: 2000 }, function(){location.href=data.url;});  
+				}
+    		}
+    	});
+        $("#code").click(function(){
+            var phone = $("input[name=username]").val();
+            $.ajax({
+               type: "POST",
+               url: "{:U('Login/code')}",
+               data: {phone:phone},
+               success: function(data){
+                    if(data.status == 0){
+                        layer.msg(data.info, {icon: 5,time: 2000 });  
+                    }else{
+                        layer.msg(data.info, {icon: 1,time: 2000 });  
+                    }
+               }
+            });
+        });
+</script>
+</body>
+</html>

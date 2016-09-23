@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="pragram" content="no-cache">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>后台管理</title>
+	<link href="__PUBLIC__/Admin/css/swiper.css" rel="stylesheet" type="text/css">
+	<link href="__PUBLIC__/Admin/css/style.css" rel="stylesheet" type="text/css">
+	<link href="__PUBLIC__/Admin/css/animate.css" rel="stylesheet" type="text/css">
+	<link href="__PUBLIC__/Admin/css/iconfont.css" rel="stylesheet" type="text/css">
+	<script src="__PUBLIC__/Admin/js/jquery-1.11.1.min.js"></script>
+	<script src="__PUBLIC__/Admin/js/publicjquery.js"></script>
+	<script src="__PUBLIC__/Admin/js/swiper.min.js"></script>
+    <script src="__PUBLIC__/layer/layer.js"></script>
+</head>
+<body onselectstart="return false">
+<div class="main">
+	<div class="content">
+		<div class="head-content">
+			<div class="head-title">配送列表</div>
+            <form action="{:U('UserAdmin/index')}" method="GET">
+			<div class="head-search">
+<!--                 <div class="form-time-list">
+                    <input type="text" placeholder="开始时间" /><span>至</span><input type="text" placeholder="结束时间"/>
+                </div> -->
+                <input class="form-input-small" type="text" name="search" placeholder="请输入" />
+<!--                 <select class="form-select-small">
+                    <option value="">请选择</option>
+                    <option value="">北戴河</option>
+                    <option value="">北戴河</option>
+                </select> -->
+				<button class="form-button color-bg-green">搜索</button>
+			</div>
+            </form>
+		</div>
+	</div>
+	
+	<div class="table-list">
+		<table cellpadding="0" cellspacing="0">
+			<thead>
+				<tr>
+                    <th>快递单号</th>
+                    <th>收件人</th>
+                    <th>订单价格</th>
+					<th>联系方式</th>
+					<th>取件地址</th>
+					<th>收件地址</th>
+					<th>状态</th>
+					<th>发布时间</th>
+					<!-- <th>操作</th> -->
+				</tr>
+			</thead>
+			<volist name="OrderList" id="vo">
+			<tr>
+				<td>{$vo.sendgoodno}</td>
+				<td>{$vo.name}</td>
+				<td>{$vo.price}</td>
+				<td>{$vo.phone}</td>
+				<td>{$vo.Dot.address}</td>
+				<td>{$vo.city_id_list.0.city}{$vo.city_id_list.1.city}{$vo.city_id_list.2.city}{$vo.city_id_list.3.city}{$vo.address}</td>
+				<td class="color-yellow">
+                    <switch name="vo.status">
+                        <case value="2">已发布</case>
+                        <case value="3">已接单</case>
+                        <case value="4">已完成</case>
+                        <case value="5">已撤销</case>
+                        <case value="6">已取货</case>
+                    </switch>
+                </td>
+
+				<td>
+					<div>
+						{$vo.createtime|date="Y-m-d H:i:s",###}
+					</div>
+				</td>
+			</tr>
+            </volist>
+			<volist name="SendList" id="vo">
+			<tr>
+				<td>{$vo.number}</td>
+				<td>{$vo.receiver_name}</td>
+				<td>{$vo.price}</td>
+				<td>{$vo.receiver_mobile}</td>
+				<td>{$vo.sender_city}</td>
+				<td>{$vo.receiver_city}{$vo.receiver_address_detail}</td>
+				<td class="color-yellow">
+                    <switch name="vo.status">
+                        <case value="2">已发布</case>
+                        <case value="3">已接单</case>
+                        <case value="4">已完成</case>
+                        <case value="5">已撤销</case>
+                        <case value="6">已取货</case>
+                    </switch>
+                </td>
+
+				<td>
+					<div>
+						{$vo.createtime|date="Y-m-d H:i:s",###}
+					</div>
+				</td>
+			</tr>
+            </volist>
+		</table>
+        <empty name="OrderList">
+            <empty name="SendList">
+                <div class="nodata"><i class="iconfont">&#xe607;</i><span>没有查询到符合条件的记录</span></div>
+            </empty>
+        </empty>
+		<div class="table-foot">
+			<div class="delete-all">
+				<a href="#">删除</a>
+			</div>
+			<div class="foot-page">
+				<ul>
+					<li>
+						<a href="#"><</a>
+					</li>
+					<li>
+						<a class="active" href="#">1</a>
+					</li>
+					<li>
+						<a href="#">2</a>
+					</li>
+					<li>
+						<a href="#">3</a>
+					</li>
+					<li class="page-ellipsis">
+						<a href="#">...</a>
+					</li>
+					<li>
+						<a href="#">12</a>
+					</li>
+					<li>
+						<a href="#">></a>
+					</li>
+				</ul>
+				<div class="pade-switch">
+					<input type="text"/>
+					<a href="#" class="pade-switch-btn">GO</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="pop-window pop-delete">
+	<div class="pop-notice FromUpToDown">
+		<div class="notice-head">
+			<div class="notice-head-title">温馨提示</div>
+			<div class="notice-head-delete">×</div>
+		</div>
+		<div class="notice-content">
+			<div>
+				<i class="iconfont">&#xe607;</i>
+			</div>
+			<div class="notice-content-word">是否要删除本条信息？</div>
+		</div>
+		<div class="notice-foot">
+			<a href="javascript:;" class="notice-btn btn-submit">确定</a>
+			<a href="javascript:;" class="notice-btn btn-drop">取消</a>
+		</div>
+	</div>
+</div>
+
+<div class="main-foot">Copyright  2013-2015 WeiGouTong.com. All Rights Reserved.  苏ICP备09098830号</div>
+<script>
+	$(".delete").click(function(){
+		$(".pop-delete").fadeIn("fast");
+	});
+	$(".eye").click(function(){
+		$(".pop-detail").fadeIn("fast");
+		var mySwiper = new Swiper('.pop-img-list', {
+		prevButton:'.swiper-button-prev',
+		nextButton:'.swiper-button-next',
+	});
+	});
+</script>
+</body>
+</html>

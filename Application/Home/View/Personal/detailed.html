@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="pragram" content="no-cache">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>意见反馈</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <link href="__PUBLIC__/Home/css/iconfont.css" rel="stylesheet" type="text/css">
+    <link href="__PUBLIC__/Home/css/style.css" rel="stylesheet" type="text/css">
+    <script src="__PUBLIC__/Home/js/jquery-1.11.1.min.js"></script>
+
+</head>    
+<body>
+    <div class="head flexBox headSearch" >
+        <a href="javascript:;" class="iconfont icon-zuo"></a>
+        <div class="logoTitle">人人配送</div>
+    </div>
+    <div class="recordTitle">
+        {:date("Y")}年{:$_GET['m']}月 收入
+        <div class="r">{:number_format($yertotal,2)}</div>
+    </div>
+    <ul class="recordList">
+        <volist name="PackageInfo" id="vo">
+        <li>
+            <div class="recordListTitle">
+                <div class="l"><if condition="$key eq date('m-d')">今天<else />{$key}</if></div>
+                <foreach  name="total" item="to" key="k">
+                    <if condition="$key eq $k">
+                        <div class="r">{$to.total|number_format=2}/元</div>
+                    </if>
+                </foreach >
+            </div>
+            <volist name="vo" id="do">
+            <div>
+                <div class="l">配送完成单</div>
+                <div class="r">+{$do.price}</div>
+            </div>
+            </volist>
+        </li>
+        </volist>
+    </ul>
+</body>
+</html>

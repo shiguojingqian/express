@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="pragram" content="no-cache">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>订单</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <link href="__PUBLIC__/Home/css/iconfont.css" rel="stylesheet" type="text/css">
+    <link href="__PUBLIC__/Home/css/style.css" rel="stylesheet" type="text/css">
+    <script src="__PUBLIC__/Home/js/jquery-1.11.1.min.js"></script>
+    <script src="__PUBLIC__/layer/layer.js"></script>
+</head>    
+<body>
+    <div class="head flexBox headSearch" >
+        <a href="javascript:;" class="iconfont icon-zuo"></a>
+        <div class="logoTitle">人人配送</div>
+<!--         <a href="javascript:;" class="r dingwei">
+            <i class="iconfont icon-dingwei"></i>
+            苏州
+        </a> -->
+    </div>
+    <form action="{:U('Send/ajaxsend')}" method="POST">
+    <label class="switchBlock">
+        物品名称
+        <input class="r" name="goods_name" type="text" placeholder="请输入物品名称" />
+    </label>
+    <label class="switchBlock icon-right">
+        重量
+        <select name="weight">
+            <option value="">请选择</option>
+            <option>1kg</option>
+            <option>2kg</option>
+            <option>3kg</option>
+            <option>4kg</option>
+            <option>5kg</option>
+        </select>
+        <div class="r">请选择</div>
+    </label>
+    <label class="switchBlock icon-right">
+        取件时间
+        <select name="fetchtime">
+            <option value="">请选择</option>
+            <option value="现在">现在</option>
+            <volist name="time" id="vo">
+            <option <if condition="$vo lt date('H:i')">disabled style="color:red;"</if> value="{$vo}">{$vo}</option>
+            </volist>
+        </select>
+        <div class="r">请选择</div>
+    </label>
+    <label class="switchBlock icon-right">
+        加急订单<span class="switchBlockNotice">加急有助于更快被接单</span>
+        <select name="vip" id="vip">
+            <option value="0">不需要</option>
+            <option value="1">需要</option>
+        </select>
+        <div class="r">不需要</div>
+    </label>
+    <div class="suppose marginBottomMore">
+        备注信息
+        <textarea placeholder="请填写您的备注信息..." name="remarks"></textarea>
+    </div>
+    <div class="footer">
+        合计 <span class="color-red">￥<span class="total">{$total}</span></span>
+        <a class="r submit" href="javascript:;">提交订单</a>
+    </div>
+    </form>
+    <script type="text/javascript">
+        $(".switchBlock select").change(function(){
+            $(this).siblings("div").text($(this).children("option:selected").text());
+        });
+        $(".switchBlock input[type=date]").change(function(){
+            $(this).siblings("div").text($(this).val());
+        });
+        $("#vip").change(function(){
+            var price = "{$total}";
+            if($(this).val() == 1){
+                var total = parseFloat(parseFloat(price) + parseFloat("{$vip}"));
+                $(".total").html(total);
+            }else{
+                $(".total").html(price);
+            }
+        });
+    </script>
+</body>
+<script type="text/javascript">
+    	$(".submit").click(function(){
+    		var self = $('form');
+    		$.post(self.attr("action"), self.serialize(), success, "json");
+    		return false;
+
+    		function success(data){
+				if(data.status == 0){
+					layer.msg(data.info, {icon: 5,time: 2000 });  
+				}else{
+					layer.msg(data.info, {icon: 1,time: 2000 }, function(){location.href=data.url});
+				}
+    		}
+    	});
+</script>
+</html>

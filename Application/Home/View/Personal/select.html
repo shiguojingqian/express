@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="pragram" content="no-cache">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>我的信息</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <link href="__PUBLIC__/Home/css/iconfont.css" rel="stylesheet" type="text/css">
+    <link href="__PUBLIC__/Home/css/style.css" rel="stylesheet" type="text/css">
+    <script src="__PUBLIC__/Home/js/jquery-1.11.1.min.js"></script>
+</head>
+<body>
+    <div class="head flexBox headSearch" >
+        <a href="javascript:;" class="iconfont icon-zuo"></a>
+        <div class="logoTitle">人人配送</div>
+    </div>
+    <div class="addPosition">
+        <label class="formList">
+            市
+            <select class="change">
+                <option value=''>请选择</option>
+                <volist name="RegionList" id="vo">
+                <option value="{$vo.id}">{$vo.city}</option>
+                </volist>
+            </select>
+            <div class="r">请选择</div>
+        </label>
+        <label class="formList">
+            区
+            <select class="change">
+                <option value=''>请选择</option>
+            </select>
+            <div class="r">请选择</div>
+        </label>
+        <label class="formList">
+            镇
+            <select class="change">
+                <option value=''>请选择</option>
+            </select>
+            <div class="r">请选择</div>
+        </label>
+        <label class="formList">
+            村
+            <select class="change" name="rid">
+                <option value=''>请选择</option>
+            </select>
+            <div class="r">请选择</div>
+        </label>
+    </div>    
+    <input class="btnA" type="submit" onclick="history.go(-1);" value="保&nbsp;&nbsp;存" />
+    <script type="text/javascript">
+        $(".formList select").change(function(){
+            $(this).siblings("div.r").text($(this).children("option:selected").text());
+        })
+    </script>
+</body>
+<!-- <body>
+    <div class="head flexBox headSearch" >
+        <a href="javascript:;" class="iconfont icon-zuo"></a>
+        <div class="logoTitle">人人配送</div>
+    </div>
+    <div class="selectGroup">
+        <select class="change">
+            <option value="">请选择市</option>
+            <volist name="RegionList" id="vo">
+            <option value="{$vo.id}">{$vo.city}</option>
+            </volist>
+        </select>
+        <select class="change">
+            <option>请选择区</option>
+        </select>
+        <select class="change">
+            <option>请选择镇</option>
+        </select>
+        <select class="change">
+            <option>请选择村</option>
+        </select>
+    </div>
+    <input class="btnA" type="submit" value="保&nbsp;&nbsp;存" />
+</body> -->
+<script>
+        $(".change").change(function(){
+            var id = $(this).val();
+            var self = $(this);
+            var html = '<option value="">请选择</option>';
+            var rid = $("select[name=rid] option:selected").data('rid');
+            if(rid){
+                localStorage.setItem('rid',rid);
+                return false;
+            }
+            if(id != ''){
+                $.ajax({
+                    url: "{:U('Personal/select')}" ,  
+                    type: 'POST',  
+                    data: {'id':id},
+                    async: false,  
+                    dataType: 'json',
+                    success: function (data) {
+                        var datalength = data.info.length;
+                        self.parent('.formList').nextAll('.formList').find('select').html(html);
+                        if(datalength >= 1){
+                            for(var i=0;i<datalength;i++){
+                               html += "<option value='"+data.info[i]['id']+"' data-rid='"+data.info[i]['range_id']+"'>"+data.info[i]['city']+"</option>";
+                            }
+                            self.parent('.formList').next('.formList').find('select').html(html);
+                            self.parent('.formList').nextAll('.formList').find('.r').html("请选择");
+                        }
+                    }
+                });
+            }else{
+                self.parent('.formList').nextAll('.formList').find('select').html(html);
+                self.parent('.formList').nextAll('.formList').find('.r').html("请选择");
+            }
+        });
+</script>
+</html>

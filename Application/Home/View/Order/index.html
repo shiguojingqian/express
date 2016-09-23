@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="pragram" content="no-cache">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>登录</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <link href="__PUBLIC__/Home/css/iconfont.css" rel="stylesheet" type="text/css">
+    <link href="__PUBLIC__/Home/css/style.css" rel="stylesheet" type="text/css">
+    <script src="__PUBLIC__/Home/js/jquery-1.11.1.min.js"></script>
+    <script src="__PUBLIC__/layer/layer.js"></script>
+</head>    
+<body>
+    <div class="loginContent">
+        <span></span>
+        <div class="middleContent2">
+            <img src="__PUBLIC__/Home/images/kv.png"/>
+            <form method="POST" action="{:U('Order/orderlist')}">
+            <input name="openid" type="hidden" value="{$UserInfo['openid']}" />
+            <label class="flexBox">
+                <i class="iconfont icon-shouji"></i>
+                <input class="flexChild" name="phone" type="tel" placeholder="请输入手机号" />
+            </label>
+<!--              <div class="label flexBox">
+                <i class="iconfont icon-yanzhengma"></i>
+                <input class="flexChild" type="password" placeholder="请输入验证码" />
+                <input type="button" value="获取验证码">
+            </div> -->
+            <input class="loginBtn" type="submit" value="查&nbsp;&nbsp;&nbsp;询" />
+            </form>
+        </div>
+    </div>
+<script type="text/javascript">
+     var move = function(e) {
+          e.preventDefault && e.preventDefault();
+          e.returnValue = false;
+          e.stopPropagation && e.stopPropagation();
+          return false;
+        }
+        //取消禁止滚动
+        function remliste() {
+          window.removeEventListener('touchmove', move);
+        }
+        //禁止滚动
+        function addliste() {
+          window.addEventListener('touchmove', move);
+        }
+        addliste();
+</script>
+</body>
+</html>
